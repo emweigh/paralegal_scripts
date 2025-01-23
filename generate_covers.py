@@ -71,4 +71,8 @@ genRange(start,end)
 genCovers()
 saveCoversCWD()
 
+print("Sheets made!")
+
 # Now to write the module where we append the slipsheets to the correct exhibit
+# Test edit
+#
