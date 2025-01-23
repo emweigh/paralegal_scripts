@@ -2,25 +2,32 @@ from pypdf import PdfWriter, PdfReader
 import io
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
+from reportlab.lib.units import inch
 import sys
 import os
 import re
+import string
+from string import ascii_uppercase
+import itertools
 
-# Command 1 is the Start of Exhibit Range
-# Command 2 is the End of Exhibit Range
+# Arg 1 is the Start of Exhibit Range
+# Arg 2 is the End of Exhibit Range
+# Remember Arg 0 is the call to the scriptfile itself!
 start = sys.argv[1]
 end = sys.argv[2]
-exhibitOrder = []
-coverSheets = []
+exhibitOrder = []# Array of the exhibit numbers/letters
+coverSheets = []# Tuple of (exhibit letter/number,pdf object of cover sheet)
 
 # Generate an array containing the Exhibit numbers/letters
-def genRange():
-	global start, end
+def genRange(start,end):
 	global exhibitOrder
+	# For letter exhibits
 	if not start.isdigit() and not end.isdigit():
-		exhibitOrder = [chr(i) for i in range(ord(start),ord(end)+1)]
-	elif len(end) > 1:
-		
+		# exhibitOrder = [chr(i) for i in range(ord(start),ord(end)+1)]
+		for size in range(len(start),len(end)+1):
+			for exhibit in itertools.product(ascii_uppercase, repeat=size):
+				exhibitOrder.append(exhibit)
+	# For number exhibits
 	else:
 		exhibitOrder = [i for i in range(int(start),int(end)+1)]
 
@@ -31,8 +38,8 @@ def genCovers():
 		sheet = io.BytesIO()
 		page = canvas.Canvas(sheet, pagesize=letter)
 		page.setFont("Times-Roman", 48)
-		text = str("Exhibit " + str(exhibit))
-		page.drawString(216, 719, text)
+		text = str("Exhibit %s" % ''.join(exhibit))
+		page.drawCentredString(4.25*inch,5.5*inch, text)
 		page.save()
 		coverSheets.append((exhibit,sheet))
 
@@ -40,14 +47,23 @@ def genCovers():
 def saveCoversCWD():
 	global coverSheets
 	for cover in coverSheets:
-		output_stream = open("Exhibit " + str(cover[0]) +" Slipsheet.pdf", "wb")
+		exhRaw = ''.join(cover[0])
+		padding = '0' if exhRaw.isdigit() else '_'
+		width = len(''.join(coverSheets[-1][0]))
+		exhForm = f'{exhRaw:{padding}>{width}}'
+		output_stream = open("Exhibit_%s_Slipsheet.pdf" % exhForm, "wb")
 		output = PdfWriter()
 		output.add_page(PdfReader(cover[1]).pages[0])
 		output.write(output_stream)
 		output_stream.close()
 
-genRange()
+# TODO
+# Remove all generated cover sheets in CWD
+def cleanSheets():
+	return none
+
+genRange(start,end)
 genCovers()
 saveCoversCWD()
 
-# Now to write the portion where we append the slipsheets to the correct exhibit
+# Now to write the module where we append the slipsheets to the correct exhibit
