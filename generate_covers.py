@@ -58,7 +58,12 @@ def saveCoversCWD():
 		output_stream.close()
 
 # TODO
-# Remove all generated cover sheets in CWD
+# Remove local gen in CWD function
+# Replace with function that evaluates a given directory (default: CWD)
+# finds PDFs that matches the exhibit from coverSheets(exhibit,sheet)
+# Regex to use is something like '/((EXHIBIT|EX.|EXH.|Exhibit|Exh\.+|Ex\.+)[\s-]+[\d\w]*)/'
+
+# function to flush buffer
 def cleanSheets():
 	return none
 
