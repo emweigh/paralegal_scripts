@@ -38,7 +38,7 @@ def genCovers():
 		sheet = io.BytesIO()
 		page = canvas.Canvas(sheet, pagesize=letter)
 		page.setFont("Times-Roman", 48)
-		text = str("Exhibit %s" % ''.join(exhibit))
+		text = str("Exhibit %s" % ''.join(str(exhibit)))
 		page.drawCentredString(4.25*inch,5.5*inch, text)
 		page.save()
 		coverSheets.append((exhibit,sheet))
@@ -47,9 +47,9 @@ def genCovers():
 def saveCoversCWD():
 	global coverSheets
 	for cover in coverSheets:
-		exhRaw = ''.join(cover[0])
+		exhRaw = ''.join(str(cover[0]))
 		padding = '0' if exhRaw.isdigit() else '_'
-		width = len(''.join(coverSheets[-1][0]))
+		width = len(''.join(str(coverSheets[-1][0])))
 		exhForm = f'{exhRaw:{padding}>{width}}'
 		output_stream = open("Exhibit_%s_Slipsheet.pdf" % exhForm, "wb")
 		output = PdfWriter()
