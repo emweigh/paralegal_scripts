@@ -26,7 +26,7 @@ def genRange(start,end):
 		# exhibitOrder = [chr(i) for i in range(ord(start),ord(end)+1)]
 		for size in range(len(start),len(end)+1):
 			for exhibit in itertools.product(ascii_uppercase, repeat=size):
-				exhibitOrder.append(exhibit)
+				exhibitOrder.append(''.join(exhibit))
 	# For number exhibits
 	else:
 		exhibitOrder = [i for i in range(int(start),int(end)+1)]
@@ -37,8 +37,8 @@ def genCovers():
 	for exhibit in exhibitOrder:
 		sheet = io.BytesIO()
 		page = canvas.Canvas(sheet, pagesize=letter)
-		page.setFont("Times-Roman", 48)
-		text = str("Exhibit %s" % ''.join(str(exhibit)))
+		page.setFont("Times-Bold", 48)
+		text = str("EXHIBIT %s" % ''.join(str(exhibit)))
 		page.drawCentredString(4.25*inch,5.5*inch, text)
 		page.save()
 		coverSheets.append((exhibit,sheet))
