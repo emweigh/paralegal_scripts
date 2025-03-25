@@ -6,6 +6,9 @@
 2. Add function that will match exhibit PDFs with corresponding coversheet PDF
 3. Add function that will merge coversheet with exhibit PDFs
 4. Rewrite cover sheet gen function to select directory to save or create new function to do that
+
+## relativity-scripts
+1. Integrate argparse modules into scripts for better argument handling and also to create an easy "help" interface for users
   
 # Summary of Scripts
 The scripts contained in this repository are designed to take in a document export from Relativity and a .CSV export of associated fields in order to perform PDF batch operations.
@@ -21,4 +24,6 @@ IDs non-PDF document exports and renames them to following filename format: "YYY
 
 ## rename_singleton_export.py
 This script parses a .CSV export file, identifies documents that are not part of family groups, and then renames to the following filename format: "YYYY.MM.DD FileName Bates"
->>>>>>> fe5ac9c322817ae997bb32055eb140350fcc2f9b
+
+## generate_covers.py
+This script allows you to generate cover sheets for exhibits - both letter and number exhibits!
