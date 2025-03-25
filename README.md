@@ -7,7 +7,6 @@
 3. Add function that will merge coversheet with exhibit PDFs
 4. Rewrite cover sheet gen function to select directory to save or create new function to do that
   
-=======
 # Summary of Scripts
 The scripts contained in this repository are designed to take in a document export from Relativity and a .CSV export of associated fields in order to perform PDF batch operations.
 
