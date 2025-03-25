@@ -16,7 +16,7 @@
 ## generate_covers
 
 #### *generate_covers.py*
-<table><tr><td>This script allows you to generate cover sheets for exhibits - both letter and number exhibits!</td></tr></table>
+This script allows you to generate cover sheets for exhibits - both letter and number exhibits!
 
 ## relativity_scripts
 
