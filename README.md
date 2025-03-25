@@ -1,15 +1,17 @@
-# TODO:
+# To Do List
 
 ## generate_covers.py
 
-1. ~~Add function that will allow exhibits ranges starting from AA - ZZ~~
-2. Add function that will match exhibit PDFs with corresponding coversheet PDF
-3. Add function that will merge coversheet with exhibit PDFs
-4. Rewrite cover sheet gen function to select directory to save or create new function to do that
+- [X] ~~Add function that will allow exhibits ranges starting from AA - ZZ~~
+- [ ] Add function that will match exhibit PDFs with corresponding coversheet PDF
+- [ ] Add function that will merge coversheet with exhibit PDFs
+- [ ] Rewrite cover sheet gen function to select directory to save or create new function to do that
 
 ## relativity-scripts
-1. Integrate argparse modules into scripts for better argument handling and also to create an easy "help" interface for users
-  
+- [ ] Integrate argparse modules into scripts for better argument handling and also to create an easy "help" interface for users
+
+***
+
 # Summary of Scripts
 The scripts contained in this repository are designed to take in a document export from Relativity and a .CSV export of associated fields in order to perform PDF batch operations.
 
