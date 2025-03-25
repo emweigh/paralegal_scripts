@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # TODO:
 
 ## generate_covers.py
