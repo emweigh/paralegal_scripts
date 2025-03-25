@@ -10,7 +10,6 @@
 ## relativity-scripts
 - [ ] Integrate argparse modules into scripts for better argument handling and also to create an easy "help" interface for users
 
-***
 
 # Summary of Scripts
 
