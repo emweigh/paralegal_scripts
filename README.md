@@ -8,7 +8,7 @@
 - [ ] Rewrite cover sheet gen function to select directory to save or create new function to do that
 
 ## relativity-scripts
-- [ ] Integrate argparse modules into scripts for better argument handling and also to create an easy "help" interface for users
+- [ ] Rewrite argument handling to use argparse modules for better argument handling and also to create an easier "help" interface for users
 
 
 # Summary of Scripts
