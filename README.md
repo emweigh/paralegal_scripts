@@ -13,7 +13,6 @@
 ***
 
 # Summary of Scripts
-The scripts contained in this repository are designed to take in a document export from Relativity and a .CSV export of associated fields in order to perform PDF batch operations.
 
 ## recreate_og_struct.py
 This script recreates the EDFolder structure of exports and moves individual documents to their original EDFolder location
