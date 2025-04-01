@@ -89,7 +89,9 @@ def saveCoversCWD():
 		output = PdfWriter()
 		
 		# Add pages to the writer
-		# Forget why we need to call PdfReader on this
+		# Forget why we need to call PdfReader on this if we already 
+		# generated PDFs that are being held in coverSheets
+		# Check: can we add to output without calling PdfReader?
 		output.add_page(PdfReader(cover[1]).pages[0])
 		
 		# Write the current PDF to the new file
