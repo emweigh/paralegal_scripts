@@ -34,26 +34,65 @@ def genRange(start,end):
 # Create the exhibit cover sheets and hold them in buffer
 def genCovers():
 	global exhibitOrder
+	# Going through array of exhibit numbers
 	for exhibit in exhibitOrder:
+		# Generate a blank PDF sheet
 		sheet = io.BytesIO()
 		page = canvas.Canvas(sheet, pagesize=letter)
+		
+		# Setting properties of PDF
 		page.setFont("Times-Bold", 48)
 		text = str("EXHIBIT %s" % ''.join(str(exhibit)))
+		
+		# Write Exhibit Text to PDF page
 		page.drawCentredString(4.25*inch,5.5*inch, text)
 		page.save()
+		
+		# Save current exhibit cover sheet to array
+		# Sheet is saved as a tuple where (str: Exhibit Number, pdf: Exhibit Sheet PDF)
 		coverSheets.append((exhibit,sheet))
 
 # Save the coversheets as PDFs in CWD
 def saveCoversCWD():
 	global coverSheets
+	
+	# Going through array of saved PDF cover sheets
 	for cover in coverSheets:
+		# We call for the raw exhibit number because we might need to add 'padding' to it later
 		exhRaw = ''.join(str(cover[0]))
+		
+		# Check if our 'numbering' is digits or letters, and set our padding to the appropriate character: '0' or '_'
 		padding = '0' if exhRaw.isdigit() else '_'
+		
+		# Check the last exhibit number. This determines how much padding we need
+		# e.g. if the last exhibit is 100, then that means we need to pad up to 3 digits, so Exhibit 1 => Exhibit 001
 		width = len(''.join(str(coverSheets[-1][0])))
+		
+		# f-string padding here
+		# Still confused a bit on how this works but
+		# We've already taken the raw exhibit number
+		# Now we call it in a f-string but also call for some formatting
+		# We already set 'padding' and 'width' previously
+		# Now we call exhRaw in the f-string and pass three values to format it
+		# The values are: '{padding', '>', and '{width}'.
+		# '{}' around the previously defined values to call them in an f-string
+		# The '>' indicates that the padding will go on the left end of whatever string/sub-string is being formatted
+		# You can also use '^' or '<' to indicate padding that is centered or right aligned
+		# Seems that calling formatting like this is position based so you need to pass in the order as shown here
+		# NOTE: 'padding' variable only seems to be accepted if it's a single character string.
 		exhForm = f'{exhRaw:{padding}>{width}}'
+		
+		# Open a new file and name it
 		output_stream = open("Exhibit_%s_Slipsheet.pdf" % exhForm, "wb")
+		
+		# Instantiate a PDFWriter class which effectively says create a PDF
 		output = PdfWriter()
+		
+		# Add pages to the writer
+		# Forget why we need to call PdfReader on this
 		output.add_page(PdfReader(cover[1]).pages[0])
+		
+		# Write the current PDF to the new file
 		output.write(output_stream)
 		output_stream.close()
 
